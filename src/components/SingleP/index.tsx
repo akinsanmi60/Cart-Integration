@@ -34,13 +34,16 @@ const SingleProduct = ({ prod }: ProdProp) => {
                         ) : (
                             <div>4 days delivery</div>
                         )}
-                        <Rating rating={prod.ratings} onClick={Function}  />
+                        <Rating rating={prod.ratings} onClick={Function} />
                     </Card.Subtitle>
                     {cart.some((p) => p.id === prod.id) ? (
                         <Button
                             variant="danger"
                             onClick={() =>
-                                dispatch()
+                                dispatch({
+                                    type: "REMOVE_FROM_CART",
+                                    payload: prod,
+                                })
                             }
                         >
                             Remove from Cart
@@ -48,7 +51,10 @@ const SingleProduct = ({ prod }: ProdProp) => {
                     ) : (
                         <Button
                             onClick={() =>
-                                dispatch()
+                                dispatch({
+                                    type: "ADD_TO_CART",
+                                    payload: prod,
+                                })
                             }
                             disabled={!prod.inStock}
                         >

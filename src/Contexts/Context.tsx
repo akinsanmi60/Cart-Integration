@@ -42,9 +42,9 @@ type ContextProp = {
     cart: CartProp[];
     products: ProductsProp[];
   },
-  dispatch: React.DispatchWithoutAction,
+  dispatch: React.Dispatch<any>,
   productState: ProductStateProp,
-  productDispatch: React.DispatchWithoutAction,
+  productDispatch: React.Dispatch<any>,
 }
 
 const Cart = createContext<ContextProp>({
@@ -52,7 +52,7 @@ const Cart = createContext<ContextProp>({
     cart: [],
     products: [],
   },
-  dispatch: () => { },
+  dispatch: () => null,
   productState: {
     byStock: false,
     byFastDelivery: false,
@@ -61,7 +61,7 @@ const Cart = createContext<ContextProp>({
     sort: "",
 
   },
-  productDispatch: () => { },
+  productDispatch: () => null,
 });
 
 
@@ -79,7 +79,6 @@ const Context = ({ children }: Props) => {
     ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
   }));
 
-  console.log(products)
 
   const [state, dispatch] = useReducer(cartReducer, {
     products: products,
@@ -95,7 +94,6 @@ const Context = ({ children }: Props) => {
     sort: "",
   });
 
-  console.log("++++", productState);
 
   return (
     <Cart.Provider value={{ state, dispatch, productState, productDispatch }}>

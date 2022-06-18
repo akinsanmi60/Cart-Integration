@@ -36,7 +36,10 @@ const Header = () => {
               className="m-auto"
               aria-label="Search"
               onChange={(e: { target: { value: any; }; }) => {
-                productDispatch();
+                productDispatch({
+                  type: "FILTER_BY_SEARCH",
+                  payload: e.target.value,
+                });
               }}
             />
           </Navbar.Text>
@@ -66,7 +69,10 @@ const Header = () => {
                         fontSize="20px"
                         style={{ cursor: "pointer" }}
                         onClick={() =>
-                          dispatch()
+                          dispatch({
+                            type: "REMOVE_FROM_CART",
+                            payload: prod,
+                          })
                         }
                       />
                     </span>
